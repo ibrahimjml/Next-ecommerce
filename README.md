@@ -1,23 +1,43 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Key features
+# Next Ecommerce 
 
--User Authentication: 
-Secure registration and login process with role-based access control. Admins can manage products while users can view and purchase items.
-Product Management: Admins can easily add, update, and delete products, including images, descriptions, prices, and categories (Men, Women, Kids).
--Shopping Cart: 
-Users can add items to their cart, adjust quantities, and proceed to checkout with a straightforward user interface.
-Category Filtering: 
-Users can filter products by category to quickly find items that interest them.
--Responsive Design: 
-The application is optimized for all screen sizes, providing a user-friendly experience on desktops, tablets, and mobile devices.
--Image Uploads:
-Products can include images uploaded to the server, enhancing the shopping experience.
-Dynamic Routing: Utilize Next.js dynamic routing to create unique product detail pages for every item in the store.
+## Project Description
 
-First, run the development server:
+This eCommerce application is built using Next.js, a powerful React framework that enables server-side rendering and static site generation for optimal performance. The project features a sleek and responsive design, allowing users to browse products seamlessly across various devices.
+
+### Features
+
+#### User Authentication: 
+- **User Authentication:** Secure registration and login process with role-based access control. Admins can manage products while users can view and purchase items.
+Product Management:** Admins can easily add, update, and delete products, including images, descriptions, prices, and categories (Men, Women, Kids).
+- **Shopping Cart:** Users can add items to their cart,remove them, adjust quantities, and proceed to checkout with a straightforward user interface.
+- **Password Management:** Users can change their passwords and reset them if forgotten.
+- **Middleware/Policies:** Implement custom middleware for secure routes and accessing pages.
+- **Category Filtering:** Users can filter products by category to quickly find items that interest them.
+- **Responsive Design:** The application is optimized for all screen sizes, providing a user-friendly experience on desktops, tablets, and mobile devices.
+- **Image Uploads:** Products can include images uploaded to the server, enhancing the shopping experience.
 
 
+## INSTALLATION
+1.📦 Install dependencies.
+```
+npm install
+```
+2.🛠️ run this script for generating an admin account in MongoDB.
+```
+node src/scripts/admin.js
+```
+3.🔑 Generate the env with secret email admin and pass.
+
+3.🔑 Generate a secret key in auth/[...nextauth]/routejs.
+
+4.📦 Set up your MongoDB database and configure the connection in your environment variables.
+
+2.🛠️ run the project
+```
+npm run dev
+```
 
 
 
