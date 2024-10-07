@@ -1,0 +1,39 @@
+input[type=text],input[type=number], textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+
+  &::placeholder{
+    color: rgba(183, 183, 186, 0.564);
+  }
+}
+
+.btn {
+  background-color: #0476aa;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0620b8;
+}
+
+.container {
+  align-items: center;
+  margin-inline: 25%;
+  margin-top: 48px;
+  margin-bottom: 9rem;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 50%;
+  box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.1);
+}

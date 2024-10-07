@@ -1,0 +1,15 @@
+footer{
+  text-align: center;
+  background-color: var(--footer-bg);
+  padding-block: 1rem;
+  margin-top: auto;
+  color: white;
+  font-size: 17px;
+  position: relative;
+  z-index: 30;
+
+  & span {
+    color: #ff7790;
+    text-transform: capitalize;
+  }
+}

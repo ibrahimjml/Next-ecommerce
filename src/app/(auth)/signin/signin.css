@@ -1,0 +1,85 @@
+section h1,h2,h3 {
+  text-align: center;
+  margin-top: 10px;
+}
+form{
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #3836360f;
+  box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 350px;
+  margin: 50px auto;
+}
+.input-group{
+  margin-bottom: 30px;
+  position: relative;
+  /* isolation: isolate; */
+  display: flex;
+  align-items: center;
+  padding-block: 13px;
+  border-bottom: 1px solid grey;
+}
+
+.input-group label{
+  position: absolute;
+  left: 0;
+  top: 50%;
+   transform: translateY(-50%);
+  font-size: 16px;
+  font-weight: 700;
+  transition: 0.2s ease;
+  color: rgb(9, 7, 7);
+}
+
+.input-group input{
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  background-color: transparent;
+  color: rgb(11, 9, 9);
+}
+
+.input-group input:not(:placeholder-shown) ~ label,
+.input-group input:focus ~ label{
+  font-size: 10px;
+  top: 0;
+  color: #0a0c0a;
+}
+form button{
+  max-width: fit-content;
+  margin-left: 31%;
+  padding: 8px 30px;
+  letter-spacing: 1px;
+  outline: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(251, 247, 248);
+  background-color: var(--footer-bg);
+  border-radius: 3px;
+  cursor: pointer;
+}
+form p {
+  margin-top: 10px;
+  color: #01070a;
+  text-align: center;
+  font-weight: 700;
+}
+form p a {
+  text-decoration: none;
+  text-align: center;
+  margin-top: 10px;
+  color: #54555671;
+}
+form p a{
+  margin-left: 6px;
+  transition: 0.3s ease;
+}
+form p a:hover{
+  color: #545556;
+}
+
+
