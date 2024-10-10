@@ -1,34 +1,33 @@
 "use client";
 import { useState, useEffect } from "react";
-import Footer from "@/components/Footer/footer";
-import Header from "@/components/Header/header";
+import Footer from "@/app/components/Footer/footer";
+import Header from "@/app/components/Header/header";
 import "./product-details.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { notFound } from "next/navigation";
 import Image from "next/image";
 import AdminButtons from "./adminButtons";
 import Loading from "../../(home)/loading";
 import { useCart } from "@/app/context/cartcontext";
+import { useRouter } from "next/navigation";
+import { Badge, Button, IconButton } from "@mui/material";
+import { Add, Remove, ShoppingCart } from "@mui/icons-material";
+import { styled, useTheme } from "@mui/material/styles";
 
 
 export default function Page({ params }) {
   const [loading, setLoading] = useState(true);
   const [objData, setObjData] = useState(null);
+  const router = useRouter();
+  const { handleAddToCart,cart,handleIncreaseQuantity,handleDecreaseQuantity } = useCart();
+  const theme = useTheme();
 
-  const { addToCart } = useCart();
+  
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {},
+  }));
 
-  const handleAddToCart = () => {
-    if (objData) {
-      // Pass only serializable product data (no DOM nodes)
-      const productData = {
-        id: objData._id,
-        title: objData.title,
-        price: objData.price,
-        image: objData.image,
-      };
-      addToCart(productData);
-    }
+  const productQuantity = (item) => {
+    const myProduct = cart.find((items) => items.id === item._id);
+    return myProduct.quantity;
   };
 
   useEffect(() => {
@@ -38,24 +37,34 @@ export default function Page({ params }) {
           `http://localhost:3000/api/getOneproduct?id=${params.id}`
         );
         if (!res.ok) {
-          return notFound();
+          router.push("/404");
+          return ;
         }
         const data = await res.json();
         setObjData(data);
         setLoading(false);
       } catch (error) {
         console.error("Failed to fetch product:", error);
+        router.push("/404");
+        
+      }finally{
         setLoading(false);
       }
     };
 
-    fetchData(params.id);
-  }, [params.id]);
+    fetchData();
+  }, [params.id,router]);
 
-  if (loading) return <Loading />;
+  if (loading) {
+    return (
+      <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+        <Loading/>
+      </div>
+    )
+  };
 
   if (!objData) {
-    return notFound();
+    return router.push("/404");
   } else {
     return (
       <>
@@ -69,31 +78,63 @@ export default function Page({ params }) {
           }}
         >
           <Header />
-          <div>
-            <main style={{ textAlign: "center" }} className="flex">
-              <Image alt="" src={objData.image} width={200} height={200} />
+          <div style={{width:"80%",marginInline:"auto"}} >
+            <main style={{ textAlign: "center",marginInline:"auto" }} className="flex">
+              <Image alt="" src={objData.image} width={200} height={200} priority={true}/>
               <div className="product-details">
-                <div
-                  style={{ justifyContent: "space-between" }}
-                  className="flex"
-                >
-                  <h2>{objData.title}</h2>
-                  <p className="price">${objData.price}</p>
-                </div>
+          
+                  <div style={{textAlign:"left"}}>
+                    <h2>{objData.title}</h2>
+                    <p className="price">${objData.price}</p>
+                  </div>
+            
                 <p className="description">{objData.description}</p>
-                <button className="flex add-to-cart" onClick={handleAddToCart}>
-                  <FontAwesomeIcon
-                    style={{ width: "1rem" }}
-                    icon={faCartPlus}
-                  />
-                  Add To Cart
-                </button>
+
+                {cart.some(cartItem => cartItem.id === objData._id) ? 
+                (
+                  <div dir="rtl" style={{textAlign:"left"}}>
+                    <IconButton
+                      color="primary"
+                      sx={{ ml: "10px" }}
+                      onClick={() => {
+                        handleIncreaseQuantity(objData._id, productQuantity(objData));
+                      }}
+                    >
+                      <Add fontSize="small" />
+                    </IconButton>
+
+                    <StyledBadge badgeContent={productQuantity(objData)} color="primary" />
+
+                    <IconButton
+                      color="primary"
+                      sx={{ mr: "10px" }}
+                      onClick={() => {
+                        handleDecreaseQuantity(objData._id, productQuantity(objData));
+                      }}
+                    >
+                      <Remove fontSize="small" />
+                    </IconButton>
+                  </div>) : (
+                      <>
+                      <Button
+                      sx={{ textTransform: "capitalize", p: 1, lineHeight: 1.1, marginRight:"30px" }}
+                      variant="contained"
+                      color="primary"
+                      onClick={()=>{handleAddToCart(objData)}}
+                    >
+                    <ShoppingCart sx={{ fontSize: "18px", mr: 1 }} />
+                   Add to cart
+                 
+                    </Button>
+                    </>
+                  )}
               </div>
             </main>
             <AdminButtons ProductId={params.id} />
           </div>
           <Footer />
         </div>
+
       </>
     );
   }

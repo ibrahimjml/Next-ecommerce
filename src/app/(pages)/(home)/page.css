@@ -86,71 +86,18 @@ main h1.recommended {
     font-size: 1.4rem;
   }
 }
-
 main section.products.flex{
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem 1.4rem;
+  gap: 2rem 1.4rem;}
 
 
 
-  & article.card{
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
-  transition: 0.2s;
-  
-  }
 
 
-  & article.card:hover{
-    scale: 1.01;
-  }
 
-  & img {
-    border-radius: 5px 5px 0 0;
-  }
-
-  & .card .content {
-    background-color: #fff;
-    border-radius: 0 0 5px 5px;
-    
-  }
-
-  & .card .content .title {
-    padding-top: 0.7rem;
-    padding-inline: 0.4rem;
-    text-transform: capitalize;
-  }
-
-  & .card .content .description {
-    padding-inline: 0.4rem;
-    font-size: 0.8rem;
-    margin-top: 0.4rem;
-    margin-bottom: 0.6rem;
-    line-height: 1.1rem;
-    width: 100%;
-    word-wrap: break-word;
-  }
-
-  & .card .content .price {
-    margin-left: 0.88rem;
-    font-size: 0.9rem;
-    color: rgb(199, 0, 40);
-    font-weight: bold;
-  }
-
-  & .add-to-cart {
-    margin-right: 0.88rem;
-    background-color: var(--blue-button);
-    color: #fff;
-    border-radius: 4px;
-    padding: 6px 8px;
-    font-size: 0.7rem;
-    gap: 0.33rem;
-  }
-
-  & .fa-solid {
-    color: white;
-  }
-
+.card:hover {
+  rotate: 0.5deg;
+  scale: 1.01;
+  transition: 0.3s !important;
 }

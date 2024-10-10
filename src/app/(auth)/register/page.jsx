@@ -1,8 +1,8 @@
-import Header from "@/components/Header/header";
+import Header from "@/app/components/Header/header";
 import React from "react";
 import ResgisterForm from "./ResgisterForm";
 import "./register.css";
-import Square from "@/components/square-animation/square";
+import Square from "@/app/components/square-animation/square";
 
 export default function page() {
   return (

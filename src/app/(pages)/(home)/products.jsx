@@ -1,94 +1,143 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { useEffect, useState } from "react";
 import { notFound } from "next/navigation";
 import Loading from "./loading";
 import { useCart } from "@/app/context/cartcontext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { styled, useTheme } from "@mui/material/styles";
+import { Button, CardActions, CardContent, CardMedia, IconButton, Stack, Typography,Badge } from "@mui/material";
+import { Add, Remove, ShoppingCart } from "@mui/icons-material";
+import Card from "@mui/material/Card";
 
 export default function Products() {
-  const [additem,setadditem] = useState([])
-  const [ArrData, setstate] = useState([]);
-  const { addToCart } = useCart();
-
-  const handleAddToCart = (item) => {
-    if (item) {
-      // Pass only serializable product data (no DOM nodes)
-      const productData = {
-        id: item._id,
-        title: item.title,
-        price: item.price,
-        image: item.image,
-      };
-      addToCart(productData);
-
-       
-    }
-  };
   
+  const [ArrData, setstate] = useState([]);
+  const [iserror,setiserror] = useState(false);
+  const { handleAddToCart,cart,handleIncreaseQuantity,handleDecreaseQuantity } = useCart();
+  const theme = useTheme();
 
+  
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {},
+  }));
+
+  
+  
+  const productQuantity = (item) => {
+    const myProduct = cart.find((items) => items.id === item._id);
+    return myProduct.quantity;
+  };
+
+  
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch("http://localhost:3000/api/getproducts");
+      try{
+        const res = await fetch("http://localhost:3000/api/getproducts");
 
-      if (!res.ok) {
-        notFound();
+        if (!res.ok) {
+          notFound();
+        }
+  
+        const data = await res.json();
+        setstate(data);
+      }catch(error){
+          setiserror(true);
+          console.error(error)
       }
-
-      const data = await res.json();
-      setstate(data);
+      
     };
 
     getData();
-    const storedAddedItems = localStorage.getItem("addedItems");
-    if (storedAddedItems) {
-      setadditem(JSON.parse(storedAddedItems));
-    }
+  
   }, []);
 
-  
+  if(iserror){
+    return <p style={{ fontSize: "1.5rem", textAlign: "center" }}>Failed to load products. Please try again later.</p>;
+  }
   return (
     <>
-      {ArrData.length == 0 && <Loading />}
+        
+      
 
-      {ArrData.map((item) => {
-        const isAdded = additem[item._id] || false;
-        return (
-          <article title={item.title} key={item._id} className="card">
-            <Link href={`/product-details/${item._id}`}>
-              <Image
-                width={266}
-                height={200}
-                src={item.image}
-                alt={"no image "}
-              />
-            </Link>
-            <div style={{ width: 266 }} className="content">
-              <h1 className="title">{item.title}</h1>
-              <p className="description">{item.description.slice(0, 111)}..</p>
-              <div
-                className="flex"
-                style={{
-                  justifyContent: "space-between",
-                  paddingBottom: "0.7rem",
-                }}
-              >
-                <div className="price">{item.price} $</div>
-                <button className="add-to-cart flex" onClick={()=>{handleAddToCart(item)}} disabled={isAdded}>
-                <FontAwesomeIcon
-                    style={{ width: "1rem" }}
-                    icon={faCartPlus}
-                  />
-                  {isAdded ? "Added" : "Add to cart"}
-                </button>
-              </div>
-            </div>
-          </article>
-        );
-      })}
+<Stack
+        direction={"row"}
+        sx={{ flexWrap: "wrap", justifyContent: "center" }}
+      >
+        {ArrData.length === 0 ? (
+
+        <Loading/>
+        ) :(  ArrData.map((item) => {
+          
+          return (
+          
+            <Card
+  className="card"
+  key={item._id}
+  sx={{ maxWidth: 277, mb: 6, mx: 2 }}
+>
+  <Link href={`/product-details/${item._id}`}>
+    <CardMedia
+      component="img"
+      sx={{ maxWidth: "300px", maxHeight: "300px" }}
+      image={item.image}
+      alt={item.title}
+    />
+  </Link>
+
+  
+  <CardContent sx={{ wordBreak: "break-word", minHeight: "130px" }}> 
+    <Typography sx={{ fontSize: "20px", fontWeight: "600", textAlign: "center" }}>
+      {item.title}
+    </Typography>
+
+    <Typography variant="body2" color="text.secondary">
+      {item.description}
+    </Typography>
+  </CardContent>
+
+  <CardActions sx={{ justifyContent: "space-between" }} disableSpacing>
+    {cart.some((cartItem) => cartItem.id === item._id) ? (
+      <div dir="rtl" style={{ display: "flex", alignItems: "center" }}>
+        <IconButton
+          color="primary"
+          sx={{ ml: "10px" }}
+          onClick={() => handleIncreaseQuantity(item._id, productQuantity(item))}
+        >
+          <Add fontSize="small" />
+        </IconButton>
+
+        <StyledBadge badgeContent={productQuantity(item)} color="primary" />
+
+        <IconButton
+          color="primary"
+          sx={{ mr: "10px" }}
+          onClick={() => handleDecreaseQuantity(item._id, productQuantity(item))}
+        >
+          <Remove fontSize="small" />
+        </IconButton>
+      </div>
+    ) : (
+      <Button
+        sx={{ textTransform: "capitalize", p: 1, lineHeight: 1.1 }}
+        variant="contained"
+        color="primary"
+        onClick={() => handleAddToCart(item)}
+      >
+        <ShoppingCart sx={{ fontSize: "18px", mr: 1 }} />
+        Add to cart
+      </Button>
+    )}
+
+    <Typography mr={1} variant="body1" color={theme.palette.error.light}>
+      ${item.price}
+    </Typography>
+  </CardActions>
+</Card>
+          );
+        }))}
+    
+      
+      </Stack>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '@/components/Header/header';
+import Header from '@/app/components/Header/header';
 import ProductForm from './ProductForm';
 
 

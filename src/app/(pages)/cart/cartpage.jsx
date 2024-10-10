@@ -1,100 +1,119 @@
 "use client"
-import { faTrash } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {Box,Button,Paper,styled,IconButton,Badge,Typography,Divider,Stack,} from "@mui/material";
+import { Add, Delete, Remove } from "@mui/icons-material";
 import Image from "next/image"
 import { useCart } from "@/app/context/cartcontext";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 function Cartpage() {
   const {data:session,status} = useSession()
-  const { cart,  removeFromCart, updateCart, clearCart } = useCart();
-
-
-
-  const handleRemoveFromCart = (id) => {
-    removeFromCart(id);
-  };
-
-  const handleIncreaseQuantity = (id, quantity) => {
-    updateCart(id, quantity + 1);
-  };
-
-  const handleDecreaseQuantity = (id, quantity) => {
-    if (quantity > 1) {
-      updateCart(id, quantity - 1);
-    }
-  };
-
-  const calculateSubtotal = () => {
-    return cart.reduce(
-      (total, product) => total + product.price * product.quantity,
-      0
-    );
-  };
-
-  return (
-    <>
-    
-    <section className="cart" >
-      {cart.length == 0 ?  (<h3>No Items </h3>) : (
-  cart.map((product) => (
-    
-    <article key={product.id} className="product flex" >
-      <button onClick={() => handleRemoveFromCart(product.id)}>
-        
-        <FontAwesomeIcon
-      style={{ width: "1.5rem" }}
-      className="fa-solid fa-bag-shopping"
-      icon={faTrash}
-    />
-      </button>
-      <p className="price">${product.price}</p>
-      <div className="flex" style={{ marginRight: "1rem" }}>
-        <button className="decrease" onClick={() => handleDecreaseQuantity(product.id, product.quantity)}>-</button>
-        <div className="quantity flex">{product.quantity}</div>
-        <button className="increase" onClick={() => handleIncreaseQuantity(product.id, product.quantity)}>+</button>
-      </div>
-      <p className="title">{product.title}</p>
-      <Image
-        style={{ borderRadius: "0.22rem" }}
-        width={70}
-        height={70}
-        alt={product.title}
-        src={product.image}
-      />
-    </article>
-))
-      )}
+  const { cart,  removeFromCart, clearCart,handleIncreaseQuantity,handleDecreaseQuantity } = useCart();
   
-    
-    </section>
-    {cart.length !== 0 &&(
-      <>
-      <button className="clear" onClick={clearCart}>
-      <i style={{ color: "#fff", marginRight: "0.2rem" }} className="fa-solid fa-trash-can icon"></i>
-      Clear Cart
-    </button>
-    <section className="summary">
-      <h1>Cart Summary</h1>
-      <div className="flex">
-        <p className="Subtotal">Subtotal</p>
-        <p>${calculateSubtotal()}</p>
-      </div>
-    {status === "authenticated" && (
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      backgroundColor: "#1976d2",
+      color: "#fff",
+    },
+  }));
 
-        <button disabled="" className="checkout">
-          CHECKOUT
-        </button>
-    )}
-    
-    {status === "unauthenticated" && <a href="./signin.html">Please Sign in to proceed checkout.</a>}
+  const Subtotal = () => {
+    return cart.reduce((total, product) => total + product.price * product.quantity,0);
+  };
+
+return (
+  <Box>
+    {cart.length === 0 ? (<h3 style={{textAlign:"center",marginTop:"30px"}}>No Items </h3>): (cart.map((product) =>( 
       
-    </section>
-    </>
-    )}
     
-    </>
-  )
+        <Paper key={product.id} dir="rtl" className="item-container">
+          <div className="img-title-parent">
+            <Image src={product.image} alt="" width={100} height={100}/>
+            <p className="product-name">{product.title}</p>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <IconButton
+              sx={{ color: "#1976d2", ml: "10px" }}
+              onClick={() => {
+                handleIncreaseQuantity(product.id, product.quantity);
+              }}
+            >
+              <Add />
+            </IconButton>
+
+            <StyledBadge badgeContent={product.quantity} color="secondary" />
+
+            <IconButton
+              sx={{ color: "#1976d2", mr: "10px" }}
+              onClick={() => {
+                handleDecreaseQuantity(product.id, product.quantity);
+              }}
+            >
+              <Remove />
+            </IconButton>
+          </div>
+
+          <div className="price">
+            ${Number(product.price) * Number(product.quantity)}
+          </div>
+
+          <Button
+            sx={{ display: { xs: "none", md: "inline-flex" } }}
+            variant="text"
+            color="error"
+            onClick={() => {
+            removeFromCart(product.id);
+            }}
+          >
+            delete
+          </Button>
+
+          <IconButton
+            sx={{
+              color: "#ef5350",
+              display: { xs: "inline-flex", md: "none" },
+            }}
+            onClick={() => {
+              removeFromCart(product);
+            }}
+          >
+            <Delete />
+          </IconButton>
+        </Paper>
+    
+    )))}
+    
+
+    <Paper sx={{ width: "fit-content", mx: "auto", mt: "60px" }}>
+      <Typography align="center" p={2} variant="h6">
+        Cart Summary
+      </Typography>
+
+      <Divider />
+
+      <Stack
+        sx={{ justifyContent: "space-between", p: 1.2 }}
+        direction={"row"}
+      >
+        
+      
+          <Typography variant="body1">Subtotal</Typography>
+          <Typography variant="body1">${Subtotal()}</Typography>
+            </Stack>
+        {status === "unauthenticated" && (
+          <Link href={"/signin"} >
+            <Typography variant="body1" sx={{ p: 1 }} color="error">Please Sign in to proceed checkout.</Typography>
+          </Link>
+          )}
+    
+
+      <Divider />
+
+      {status === "authenticated" && <Button fullWidth color="primary" variant="contained">CHECKOUT</Button> }
+    </Paper>
+  </Box>
+);
 }
 
 export default Cartpage

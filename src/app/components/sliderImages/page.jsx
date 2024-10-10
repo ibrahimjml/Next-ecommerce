@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import "./page.css";
-import Header from "@/components/Header/header";
+import Header from "@/app/components/Header/header";
 import { useState, useEffect } from "react";
 
 const slides = [
@@ -64,6 +64,7 @@ function Page() {
               alt={""}
               width={900}
               height={900}
+              priority={true}
             />
             <section className="content">
               <p className="lifestyle">{slide.title}</p>

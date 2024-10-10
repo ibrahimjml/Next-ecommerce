@@ -21,7 +21,7 @@ header.flex {
 
   & .sign-in,
   & .register {
-    border: 1px solid #fff;
+    border: 1px solid #ffffff60;
     padding: 0.44rem 1rem;
     border-radius: 55px;
     font-size: 0.8rem;

@@ -1,4 +1,4 @@
-import Header from "@/components/Header/header"
+import Header from "@/app/components/Header/header"
 import "./update.css"
 import Updateform from "./updateform"
 

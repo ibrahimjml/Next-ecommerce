@@ -1,17 +1,16 @@
 "use client"
 import { createContext, useContext, useState, useEffect } from "react";
 
-// Create the context
+
 const CartContext = createContext();
 
-// Hook to use the cart context
+
 export const useCart = () => useContext(CartContext);
 
-// CartProvider component to wrap around your app
+
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  // Retrieve cart from 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart"));
     if (storedCart) {
@@ -19,7 +18,7 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
-  // Save cart to localStorage 
+
   useEffect(() => {
     if (cart.length > 0) {
       localStorage.setItem("cart", JSON.stringify(cart));
@@ -29,24 +28,54 @@ export const CartProvider = ({ children }) => {
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingProduct = prevCart.find((item) => item.id === product.id);
-      if (existingProduct) {
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        return [...prevCart, { ...product, quantity: 1 }];
-      }
+    if(existingProduct) return prevCart;
+
+     return [...prevCart, { ...product, quantity: 1 }];
+      
     });
   };
 
+  const handleAddToCart = (item) => {
+    if (item) {
+      
+      const productData = {
+        id: item._id,
+        title: item.title,
+        price: item.price,
+        image: item.image,
+        quantity:1
+      };
+      addToCart(productData);
+
+       
+    }
+  };
+  
   const removeFromCart = (id) => {
     setCart((prevCart) => {
       const updatedCart = prevCart.filter((item) => item.id !== id);
-      localStorage.setItem("cart", JSON.stringify(updatedCart)); // Update localStorage
+      localStorage.setItem("cart", JSON.stringify(updatedCart)); 
       return updatedCart;
     });
+  };
+
+  const handleIncreaseQuantity = (id) => {
+    const currentItem = cart.find((item) => item.id === id);
+    if (currentItem) {
+      updateCart(id, currentItem.quantity + 1); 
+    }
+  };  
+
+  const handleDecreaseQuantity = (id) => {
+    const currentItem = cart.find((item) => item.id === id);
+    if (currentItem) {
+      if (currentItem.quantity > 1) {
+        updateCart(id, currentItem.quantity - 1); 
+      } else {
+        
+        removeFromCart(id);
+      }
+    }
   };
 
   const updateCart = (id, quantity) => {
@@ -65,7 +94,7 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, updateCart, clearCart }}
+      value={{ cart,handleAddToCart, addToCart, removeFromCart, updateCart, clearCart,handleDecreaseQuantity,handleIncreaseQuantity }}
     >
       {children}
     </CartContext.Provider>

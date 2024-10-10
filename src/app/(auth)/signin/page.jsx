@@ -1,8 +1,8 @@
 import React from 'react'
-import Header from '@/components/Header/header'
+import Header from '@/app/components/Header/header'
 import SigninForm from './SigninForm'
 import "./signin.css"
-import Square from '@/components/square-animation/square'
+import Square from '@/app/components/square-animation/square'
 
 export default function page() {
   return (
