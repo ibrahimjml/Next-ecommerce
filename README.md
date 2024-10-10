@@ -12,8 +12,7 @@ This eCommerce application is built using Next.js, a powerful React framework th
 - **User Authentication:** Secure registration and login process with role-based access control. Admins can manage products while users can view and purchase items.
 Product Management:** Admins can easily add, update, and delete products, including images, descriptions, prices, and categories.
 - **Shopping Cart:** Users can add items to their cart,remove them, adjust quantities, and proceed to checkout with a straightforward user interface.
-- **Password Management:** Users can change their passwords and reset them if forgotten.
-- **Middleware/Policies:** Implement custom middleware for secure routes and accessing pages.
+- **Middleware:** Implement custom middleware for secure routes.
 - **Category Filtering:** Users can filter products by category to quickly find items that interest them.
 - **Responsive Design:** The application is optimized for all screen sizes, providing a user-friendly experience on desktops, tablets, and mobile devices.
 - **Image Uploads:** Products can include images uploaded to the server, enhancing the shopping experience.
@@ -24,17 +23,17 @@ Product Management:** Admins can easily add, update, and delete products, includ
 ```
 npm install
 ```
-2.🛠️ run this script for generating an admin account in MongoDB.
+2.📦 Set up your MongoDB database and configure the connection in your environment variables.
+
+3.🛠️ run this script for generating an admin account in MongoDB.
 ```
 node src/scripts/admin.js
 ```
-3.🔑 Generate the env with secret email admin and pass.
+4.🔑 Generate the env with secret email admin and pass.
 
-3.🔑 Generate a secret key in auth/[...nextauth]/routejs.
+5.🔑 Generate a secret key in auth/[...nextauth]/routejs.
 
-4.📦 Set up your MongoDB database and configure the connection in your environment variables.
-
-2.🛠️ run the project
+6.🛠️ run the project
 ```
 npm run dev
 ```
