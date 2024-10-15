@@ -14,6 +14,7 @@ This eCommerce application is built using Next.js, a powerful React framework th
 - **Shopping Cart:** Users can add items to their cart,remove them, adjust quantities, and proceed to checkout with a straightforward user interface.
 - **Middleware:** Implement custom middleware for secure routes.
 - **Category Filtering:** Users can filter products by category to quickly find items that interest them.
+- **Darkmode:** Users can toggle Dark/Light mode with smooth transition for better experience.
 - **Responsive Design:** The application is optimized for all screen sizes, providing a user-friendly experience on desktops, tablets, and mobile devices.
 - **Image Uploads:** Products can include images uploaded to the server, enhancing the shopping experience.
 
