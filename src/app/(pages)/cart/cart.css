@@ -3,16 +3,17 @@
   justify-content: space-around;
   align-content: center;
   align-items: center;
-
   border-top: 2px solid rgb(109, 176, 221);
-
   width: 500px;
   margin: 50px auto;
+  
 
-  color: rgb(0, 0, 0) !important;
-  background-color: rgb(255, 255, 255) !important;
 }
 
+
+.dark .item-container{
+  border-top: 2px solid #f44336;
+}
 .img-title-parent {
   display: flex;
   align-items: center;
@@ -32,7 +33,7 @@
 }
 
 .price {
-  color: #454545;
+  
   font-size: 18px;
   font-weight: 500;
 }
