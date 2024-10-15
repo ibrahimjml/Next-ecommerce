@@ -1,7 +1,7 @@
 import Footer from "@/app/components/Footer/footer"
 import AuthProvider from "../providers/AuthProvider"
-import "../globals.css"
 import { CartProvider } from "@/app/context/cartcontext";
+import "../globals.css"
 import { ThemeProvider } from "@/app/context/ThemeContext";
 
 export const metadata = {
@@ -12,11 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-       <body style={{height:"100vh",display:"flex",flexDirection:"column"}}
-    
-      >
+       <body style={{height:"100vh",display:"flex",flexDirection:"column"}}>
       <AuthProvider>
-        <ThemeProvider>
+      <ThemeProvider>
         <CartProvider>
         {children}
         </CartProvider>

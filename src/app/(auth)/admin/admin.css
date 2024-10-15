@@ -3,7 +3,7 @@ input[type=text],input[type=number], textarea,input[type=file],select {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+
   box-sizing: border-box;
   margin-top: 6px;
   margin-bottom: 16px;
@@ -13,8 +13,10 @@ input[type=text],input[type=number], textarea,input[type=file],select {
     color: rgba(183, 183, 186, 0.564);
   }
 }
-
-.btn {
+.dark label{
+  color: black !important;
+}
+.dark .btn {
   background-color: #04AA6D;
   color: white;
   padding: 12px 20px;
@@ -22,17 +24,29 @@ input[type=text],input[type=number], textarea,input[type=file],select {
   border-radius: 4px;
   cursor: pointer;
 }
-
-.btn:hover {
+.light .btn {
+  background-color: #1976d2;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.dark .btn:hover {
   background-color: #45a049;
 }
-
-.container {
-  border-radius: 5px;
+.light .btn:hover {
+  background-color: #1669b6;
+}
+.container-form {
+  
+  border-radius: 20px;
   background-color: #f2f2f2;
   padding: 20px;
   width: 50%;
   margin-inline: 25%;
-  margin-top: 30px;
+  margin-block: 3%;
   box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.1);
+
 }
+

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 
+
 export default function SignInForm() {
   const [email, setemail] = useState(null);
   const [pass, setpass] = useState(null);
@@ -44,7 +45,7 @@ export default function SignInForm() {
       <form onSubmit={handlesubmit}>
         <div className="input-group">
           <input
-            type="text"
+            type="email"
             placeholder=" "
             id="email"
             onChange={(eo) => {
@@ -65,7 +66,12 @@ export default function SignInForm() {
           <label htmlFor="pass">Password :</label>
         </div>
 
-        <button>{loading ? "loading.." : "Login"}</button>
+        <button style={{marginInline:"30%"}}>{loading ? "loading.." : "Login"}</button>
+      
+          <Link href={"/forgot-password"}style={{display:"block",textAlign:"center",fontSize:"15px",color:"darkgray",marginTop:"12px"}} >
+          Lost Your password ?
+          </Link>
+      
         <p>
           Donot have an account ?<Link href={"/register"}>Register</Link>
         </p>

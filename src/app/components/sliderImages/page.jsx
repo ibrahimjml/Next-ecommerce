@@ -65,7 +65,7 @@ function Page() {
               alt={""}
               width={900}
               height={900}
-              priority={true}
+              quality={100}
             />
             <section className="content">
               <p className="lifestyle">{slide.title}</p>
