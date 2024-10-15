@@ -12,14 +12,6 @@ export default function Home() {
     <>
       <Sliderimage />
       <main style={{ marginBottom: "10px" }}>
-        <h1 className="recommended">
-          <FontAwesomeIcon
-            style={{ width: "2rem" }}
-            className="fa-solid fa-check"
-            icon={faCheck}
-          />
-          Recommended for you
-        </h1>
         
           <Products />
       

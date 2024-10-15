@@ -1,4 +1,4 @@
-input[type=text],input[type=number], textarea {
+input[type=text],input[type=number],select, textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -12,7 +12,9 @@ input[type=text],input[type=number], textarea {
     color: rgba(183, 183, 186, 0.564);
   }
 }
-
+.dark label{
+  color: #000;
+}
 .btn {
   background-color: #0476aa;
   color: white;
@@ -26,11 +28,10 @@ input[type=text],input[type=number], textarea {
   background-color: #0620b8;
 }
 
-.container {
+.container-form {
   align-items: center;
   margin-inline: 25%;
-  margin-top: 48px;
-  margin-bottom: 9rem;
+  margin-block: 6%;
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;

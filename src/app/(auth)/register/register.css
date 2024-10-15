@@ -1,3 +1,19 @@
+header{
+  background: var(--footer-bg) !important;
+  color: #bbb !important;
+}
+footer{
+  background: var(--footer-bg) !important;
+  color: #bbb !important;
+}
+.container{
+  border: 1px solid var(--color-primary) !important;
+}
+.switcher{
+  background-color: var(--color-primary) !important;
+}
+
+
 section h1 {
   text-align: center;
   margin-top: 10px;

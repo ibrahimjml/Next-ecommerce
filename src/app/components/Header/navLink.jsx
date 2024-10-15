@@ -4,6 +4,7 @@ import { faCartShopping, faPlus, faRightToBracket, faUserPlus } from '@fortaweso
 import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
 import {useCart} from "@/app/context/cartcontext"
+import Darkmodetoggle from "../darkmodetoggle/darkmode"
 
 export default function Navlink({issignedin=false,isregistered=false}) {
   const{data : session,status}=useSession();
@@ -16,6 +17,7 @@ export default function Navlink({issignedin=false,isregistered=false}) {
   if (status === "authenticated" && session.user.role === "admin" ) {
     return (
       <nav className="links flex">
+        <Darkmodetoggle/>
         <Link
           className="register"
           style={{ marginRight: "0.6rem" }}
@@ -46,6 +48,7 @@ export default function Navlink({issignedin=false,isregistered=false}) {
   
           {status === "authenticated" && (
             <>
+            <Darkmodetoggle />
             <Link
             style={{ position: "relative" }}
             className="cart"
@@ -61,6 +64,7 @@ export default function Navlink({issignedin=false,isregistered=false}) {
           )}
           {status === "unauthenticated" && (
             <>
+            <Darkmodetoggle />
             <Link
             style={{ position: "relative" }}
             className="cart"

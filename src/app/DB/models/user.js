@@ -4,9 +4,12 @@ const mongoose = require("mongoose");
 
 
  const userSchema = new Schema({
-   name: String,
-   email: String,
-   pass: String,
+
+   name: { type: String, required: true },
+   email: { type: String, required: true, unique: true },
+   pass: { type: String, required: true },
+   resetToken: { type: String, default: null },
+   resetTokenExpiry: { type: Date, default: null },
    role : {type:String,enum:['user','admin'],default:'user'},
    
  });

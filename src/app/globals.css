@@ -1,9 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
 
-html {
+
+html,body {
   font-family: system-ui, -apple-system, "Roboto", sans-serif;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  transition: 0.5s all ease-in-out;
 }
 * {
   margin: 0;
@@ -27,7 +29,7 @@ html {
   --blue: #9fc5ef;
   --blue-button: #1976d2;
   --red-button: #e41d43;
-
+  --color-primary:rgba(231, 231, 9, 0.945);
   --icons: #40464d;
 
   --footer-bg: #212529;
@@ -35,12 +37,15 @@ html {
   --white: #fff;
 }
 
-body {
-  background-color: var(--bodyBG);
-  color: var(--bodyFont);
-  font-family: "Poppins", sans-serif;
-}
 
+body.light{
+  background-color: white;
+  color: #111;
+}
+body.dark{
+  background-color: #111;
+  color: #bbb;
+}
 /* =======================
        My classes
 ==========================*/
@@ -85,10 +90,7 @@ html {
   scrollbar-color: #9e4673 #3d4a59;
 }
 
-main {
-  width: 80%;
-  margin-inline: auto;
-}
+
 
 @media (width < 600px) {
   main {
@@ -132,3 +134,13 @@ li {
 .fa-solid {
   color: var(--icons);
 }
+
+.light{
+  background-color: white;
+  color: #111;
+}
+.dark{
+  background-color: #111;
+  color: #bbb;
+}
+

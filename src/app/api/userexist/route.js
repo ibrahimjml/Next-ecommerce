@@ -12,6 +12,11 @@ const user = await UserModal.findOne({
   email : data.email,
  });
 
-  return NextResponse.json({user});
+ if (user) {
+  
+  return NextResponse.json({ userExists: true });
+} else {
+  return NextResponse.json({ userExists: false });
+}
 
 }

@@ -1,6 +1,23 @@
+header{
+  background: var(--footer-bg) !important;
+  color: #bbb !important;
+}
+footer{
+  background: var(--footer-bg) !important;
+  color: #bbb !important;
+}
+.container{
+  border: 1px solid var(--color-primary) !important;
+}
+.switcher{
+  background-color: var(--color-primary) !important;
+}
+
+
+
 section h1,h2,h3 {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 40px;
 }
 form{
   background-color: white;
@@ -50,7 +67,7 @@ form{
 }
 form button{
   max-width: fit-content;
-  margin-left: 31%;
+  margin-inline: 20%;
   padding: 8px 30px;
   letter-spacing: 1px;
   outline: none;

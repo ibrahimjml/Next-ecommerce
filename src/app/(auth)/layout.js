@@ -2,6 +2,7 @@ import Footer from "@/app/components/Footer/footer"
 import AuthProvider from "../providers/AuthProvider"
 import "../globals.css"
 import { CartProvider } from "@/app/context/cartcontext";
+import { ThemeProvider } from "@/app/context/ThemeContext";
 
 export const metadata = {
   title: 'Next.js',
@@ -15,9 +16,11 @@ export default function RootLayout({ children }) {
     
       >
       <AuthProvider>
+        <ThemeProvider>
         <CartProvider>
         {children}
         </CartProvider>
+        </ThemeProvider>
         </AuthProvider>
         <Footer style={{marginTop:"auto"}}/>
         </body>

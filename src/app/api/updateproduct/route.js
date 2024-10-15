@@ -26,6 +26,7 @@ export async function PUT(request){
   {    
     title : data.title,
     price : data.price,
+    category: data.category,
     description : data.description
 
   })

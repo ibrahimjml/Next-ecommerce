@@ -4,13 +4,14 @@ const mongoose = require("mongoose");
 
 
  const productSchema = new Schema({
-   image : String,
-   title: String,
-   price: Number,
-   description: String,
-   
-   
- });
+  image : { type: String,required:true},
+  title: { type: String,required:true},
+  price: { type: Number,required:true},
+  description: { type: String,required:true},
+  category :{type:String,enum:['men','women','kids'],reuired:true}  
+},
+{ timestamps: true }
+);
 
 
  const ProductModel = models.Product || mongoose.model("Product", productSchema);

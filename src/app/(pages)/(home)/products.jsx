@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { notFound } from "next/navigation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import Loading from "./loading";
 import { useCart } from "@/app/context/cartcontext";
 import { styled, useTheme } from "@mui/material/styles";
@@ -11,7 +13,9 @@ import Card from "@mui/material/Card";
 
 export default function Products() {
   
-  const [ArrData, setstate] = useState([]);
+  const [products, setproducts] = useState([]);
+  const [category, setcategroy] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [iserror,setiserror] = useState(false);
   const { handleAddToCart,cart,handleIncreaseQuantity,handleDecreaseQuantity } = useCart();
   const theme = useTheme();
@@ -32,41 +36,62 @@ export default function Products() {
   useEffect(() => {
     const getData = async () => {
       try{
-        const res = await fetch("http://localhost:3000/api/getproducts");
+        setIsLoading(true)
+        const query = category ? `?category=${category}`: "";
+        const res = await fetch(`/api/getproducts${query}`);
 
         if (!res.ok) {
           notFound();
         }
   
         const data = await res.json();
-        setstate(data);
+        setproducts(data);
       }catch(error){
           setiserror(true);
           console.error(error)
+      }finally{
+        setIsLoading(false);
       }
       
     };
 
     getData();
   
-  }, []);
+  }, [category]);
+
+
 
   if(iserror){
     return <p style={{ fontSize: "1.5rem", textAlign: "center" }}>Failed to load products. Please try again later.</p>;
   }
+  if(isLoading) return <Loading/>;
   return (
     <>
-        
+    <div className="btns">
+      <button onClick={()=>{setcategroy(null)}}>All</button>
+      <button onClick={()=>{setcategroy("men")}}>Men</button>
+      <button onClick={()=>{setcategroy("women")}}>Women</button>
+      <button onClick={()=>{setcategroy("kids")}}>kids</button>
+    </div>
+      <h1 className="recommended">
+          <FontAwesomeIcon
+            style={{ width: "2rem" }}
+            className="fa-solid fa-check"
+            icon={faCheck}
+          />
+          {category ? `Latest ${category} Collection` : "Latest Collection"}
+        </h1>
       
 
 <Stack
         direction={"row"}
         sx={{ flexWrap: "wrap", justifyContent: "center" }}
       >
-        {ArrData.length === 0 ? (
+        
+        {products.length === 0 ? (
+         <p>No Products Found</p>
 
-        <Loading/>
-        ) :(  ArrData.map((item) => {
+        ) :(  products.map((item) => {
           
           return (
           
@@ -78,14 +103,14 @@ export default function Products() {
   <Link href={`/product-details/${item._id}`}>
     <CardMedia
       component="img"
-      sx={{ maxWidth: "300px", maxHeight: "300px" }}
+      sx={{ maxWidth: "300px" }}
       image={item.image}
       alt={item.title}
     />
   </Link>
 
   
-  <CardContent sx={{ wordBreak: "break-word", minHeight: "130px" }}> 
+  <CardContent sx={{ wordBreak: "break-word", minHeight: "100px" }}> 
     <Typography sx={{ fontSize: "20px", fontWeight: "600", textAlign: "center" }}>
       {item.title}
     </Typography>

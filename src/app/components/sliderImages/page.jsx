@@ -12,7 +12,7 @@ const slides = [
     description: "SALE UP TO",
     img: "/images/bac.jpg",
     sale: "30%",
-    color: "",
+    color: "black",
   },
   {
     id: 2,
@@ -40,14 +40,14 @@ function Page() {
   useEffect(() => {
     const intervel = setInterval(() => {
       setcurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 3000);
+    }, 4000);
 
     return () => clearInterval(intervel);
   }, []);
   return (
     <>
       <Header />
-      <div style={{ display: "flex", overflow: "hidden" }}>
+      <div className="slider-container">
         {slides.map((slide) => (
           <div
             key={slide.id}
@@ -58,6 +58,7 @@ function Page() {
               transform: `translateX(-${current * 100}vw)`,
             }}
           >
+              
             <Image
               className="img"
               src={slide.img}
@@ -94,7 +95,7 @@ function Page() {
         {slides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`circle ${current === index ? "scal" : ""}`}
+            className={`circle ${current === index ? "scale" : ""}`}
             onClick={() => {
               setcurrent(index);
             }}

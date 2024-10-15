@@ -10,6 +10,7 @@ export default function Updateform({ ProductId }) {
   const [loading, setloading] = useState(null);
   const [title, settitle] = useState(null);
   const [price, setprice] = useState(null);
+  const [category, setcategory] = useState(null);
   const [description, setdescription] = useState(null);
   const { data: session } = useSession();
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function Updateform({ ProductId }) {
     seterror(null);
     setloading(true);
 
-    if (!title || !price || !description) {
+    if (!title || !price || !description || ! category) {
       seterror("All inputs must be filled");
       setloading(false);
       return;
@@ -31,7 +32,7 @@ export default function Updateform({ ProductId }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title, price, description, ProductId }),
+      body: JSON.stringify({ title, price, category , description, ProductId }),
     });
 
     if (response.ok) {
@@ -59,6 +60,7 @@ export default function Updateform({ ProductId }) {
       setdata(data);
       settitle(data.title);
       setprice(data.price);
+      setcategory(data.category);
       setdescription(data.description);
     };
 
@@ -73,7 +75,7 @@ export default function Updateform({ ProductId }) {
   }
 
   return (
-    <div className="container">
+    <div className="container-form">
       <form onSubmit={handleupdate}>
         <label htmlFor="title">Product Title</label>
         <input
@@ -96,6 +98,14 @@ export default function Updateform({ ProductId }) {
             setprice(eo.target.value);
           }}
         />
+         
+         <label htmlFor="category">Category</label>
+         <select  id="category" defaultValue={category} onChange={(eo)=>{setcategory(eo.target.value)}}>
+         <option value="category" selected>Category</option>
+         <option value="men">Men</option>
+         <option value="women">women</option>
+         <option value="kids">kids</option>
+        </select>
 
         <label htmlFor="decription">Product Description</label>
         <textarea

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect  } from "react";
 import Footer from "@/app/components/Footer/footer";
 import Header from "@/app/components/Header/header";
 import "./product-details.css";
@@ -21,6 +21,8 @@ export default function Page({ params }) {
   const theme = useTheme();
 
   
+
+
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {},
   }));
@@ -57,7 +59,7 @@ export default function Page({ params }) {
 
   if (loading) {
     return (
-      <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+      <div style={{display:"flex",justifyContent:"center",alignItems:"center",height:"100vh"}}>
         <Loading/>
       </div>
     )
@@ -75,6 +77,7 @@ export default function Page({ params }) {
             display: "grid",
             alignItems: "center",
             gridTemplateRows: "auto 1fr auto",
+
           }}
         >
           <Header />

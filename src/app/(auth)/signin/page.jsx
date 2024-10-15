@@ -7,11 +7,9 @@ import Square from '@/app/components/square-animation/square'
 export default function page() {
   return (
     <>
-    <Header issignedin={true} style={{backgroundColor:"transparent"}}/>
+    <Header issignedin={true} />
       <section style={{zIndex:"20",position:"relative"}}>
-  <h1>WELCOME</h1>
-  <h3>TO</h3>
-  <h3>NEXT SHOP</h3>
+      <h1>User Login Form</h1>
   <SigninForm/>
 </section>
         <Square/>

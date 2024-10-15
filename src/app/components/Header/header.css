@@ -4,13 +4,7 @@ header.flex {
   padding-inline: 10%;
   width: 100%;
   z-index: 40;
- background: var(--footer-bg);
- color: #fff;
-
- 
-
-
-
+  transition: 0.5s all ease-in-out;
   & .links .fa-solid {
     margin-right: 0.3rem;
   }
@@ -21,50 +15,51 @@ header.flex {
 
   & .sign-in,
   & .register {
-    border: 1px solid #ffffff60;
+    border: 1px solid #ffffffa1;
     padding: 0.44rem 1rem;
     border-radius: 55px;
     font-size: 0.8rem;
     font-weight: 500;
-    
+    transition: all .1s ease;
   }
 
   & .sign-in:hover,
-  & .register:hover,
-  & .sign-in:hover .fa-solid,
-  & .register:hover .fa-solid {
-    background-color: var(--bodyFont);
-    color: var(--blue);
+  & .register:hover {
+
+    border: 2px solid white;
+    color: #fff;
   }
 
   & .cart {
-    background-color: var(--bodyFont);
-    color: var(--blue);
     font-size: 0.9rem;
     padding: 0.44rem 1.1rem 0.44rem 0.6rem;
     border-radius: 55px;
+    border: 1px solid #ffffffa1;
+    transition: all .1s ease;
   }
 
   & .cart .fa-solid {
-    color: var(--blue);
+    color: white;
   }
-
+  & .cart:hover{
+    border: 2px solid white;
+    color: #fff;
+  }
 
   & .products-number {
     position: absolute;
     right: 0;
-    top: -5px;
+    top: -8px;
     font-size: 0.7rem;
     font-weight: bold;
 
+    line-height: 0.7rem;
     background-color: rgb(255, 90, 123);
     height: 20px;
     width: 20px;
     color: #fff;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-content: center;
 
     border-radius: 50%;
 
@@ -80,6 +75,19 @@ header.flex {
     color: #fff;
   }
 }
+.dark header.flex{
+  background: var(--footer-bg);
+  color: #bbb;
+}
+.light header.flex{
+  background-color: #1976d2;
+  color: #fff;
+}
+.dark header.flex .products-number{
+
+  background-color: #1976d2;
+} 
+
 
 @media (width < 500px) {
   header.flex {

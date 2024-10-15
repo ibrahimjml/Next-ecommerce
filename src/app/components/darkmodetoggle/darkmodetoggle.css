@@ -1,0 +1,25 @@
+.container{
+  border: 1px solid #ffffffa1;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-between;
+  padding: 2px;
+  align-items: center;
+  position: relative;
+  margin-right: 12px;
+  transition: border .1s ease;
+}
+.container:hover{
+  border: 2px solid white;
+}
+.icons{
+  font-size: 18px;
+}
+.switcher{
+width:25px;
+aspect-ratio: 1 / 1;
+background-color: #fff;
+border-radius: 50%;
+position: absolute;
+cursor: pointer;
+}

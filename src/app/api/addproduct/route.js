@@ -14,6 +14,7 @@ try{
   const formData = await request.formData();
   const title = formData.get("title");
   const price = formData.get("price");
+  const category = formData.get("category");
   const description = formData.get("description");
   const file = formData.get("image"); // Get file
 
@@ -37,6 +38,7 @@ try{
  await ProductModal.create({
   title: title,
   price: price,
+  category: category,
   description: description,
   image: `/uploads/${filename}`,
  });
