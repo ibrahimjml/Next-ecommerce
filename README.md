@@ -9,11 +9,12 @@ This eCommerce application is built using Next.js, a powerful React framework th
 ### Features
 
 #### User Authentication: 
-- **User Authentication:** Secure registration and login process with role-based access control. Admins can manage products while users can view and purchase items.
-Product Management:** Admins can easily add, update, and delete products, including images, descriptions, prices, and categories.
+- **User Authentication:** Secure registration and login process with reset password option. Admins can manage products while users can view and purchase items.
+- **Product Management:** Admins can easily add, update, and delete products, including images, descriptions, prices, and categories.
 - **Shopping Cart:** Users can add items to their cart,remove them, adjust quantities, and proceed to checkout with a straightforward user interface.
 - **Middleware:** Implement custom middleware for secure routes.
 - **Category Filtering:** Users can filter products by category to quickly find items that interest them.
+- **Darkmode:** Users can toggle Dark/Light mode with smooth transition for better experience.
 - **Responsive Design:** The application is optimized for all screen sizes, providing a user-friendly experience on desktops, tablets, and mobile devices.
 - **Image Uploads:** Products can include images uploaded to the server, enhancing the shopping experience.
 
