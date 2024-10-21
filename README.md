@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Next js](https://github.com/user-attachments/assets/fb10f80a-8866-46fe-b508-0051627db18c)This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 # Next Ecommerce 
 
@@ -10,7 +10,8 @@ This eCommerce application is built using Next.js, a powerful React framework th
 
 #### User Authentication: 
 - **User Authentication:** Secure registration and login process with reset password option. Admins can manage products while users can view and purchase items.
-- **Product Management:** Admins can easily add, update, and delete products, including images, descriptions, prices, and categories.
+- **Product Management:** Admin can easily add, update, and delete products, including images, descriptions, prices, and categories.
+- **Backend APIs:** All APIs secured with JWT it authorized only for admin.
 - **Shopping Cart:** Users can add items to their cart,remove them, adjust quantities, and proceed to checkout with a straightforward user interface.
 - **Middleware:** Implement custom middleware for secure routes.
 - **Category Filtering:** Users can filter products by category to quickly find items that interest them.
@@ -39,7 +40,18 @@ node src/scripts/admin.js
 npm run dev
 ```
 
+## RESTful APIs for  <img height="20" src="https://drive.google.com/drive/folders/1-81uumWW-GlesydEI3MLj3T30rIMFJbn?dmr=1&ec=wgc-drive-globalnav-goto" />
 
+only admin role  can perform these CRUD.
+
+`Login`
+- `POST /api/signin` - login to get JWT token access.
+ `products`
+- `GET /api/getproducts` - Get all products.No authentication required.
+- `GET /api/getOneproduct` - Get single product send id in params.No authentication required.
+- `POST /api/addproduct` - Create new product , token required.
+- `PUT /api/updateproduct` - Update product, token required.
+- `DELETE /api/deleteproduct` - Delete single product, token required.
 
 ## Learn More
 
