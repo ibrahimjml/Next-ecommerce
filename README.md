@@ -40,7 +40,7 @@ node src/scripts/admin.js
 npm run dev
 ```
 
-## RESTful APIs for  <img height="20" src="https://drive.google.com/drive/folders/1-81uumWW-GlesydEI3MLj3T30rIMFJbn?dmr=1&ec=wgc-drive-globalnav-goto" />
+## RESTful APIs for  <img height="20" width="20" src="https://drive.google.com/drive/folders/1-81uumWW-GlesydEI3MLj3T30rIMFJbn?dmr=1&ec=wgc-drive-globalnav-goto" />
 
 only admin role  can perform these CRUD.
 
