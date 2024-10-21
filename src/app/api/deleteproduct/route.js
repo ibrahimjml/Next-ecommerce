@@ -1,30 +1,48 @@
 import ProductModal from "@/app/DB/models/product";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"; 
 import { connectMongoDB } from "../../DB/mongoose";
 import { NextResponse } from "next/server";
+import jwt from 'jsonwebtoken';
 
 export async function DELETE(request){
 
+  try{
+    const data = await request.json();
+    
+    const token = request.headers.get("Authorization")?.split(" ")[1]; 
 
-  const session = await getServerSession(authOptions);
+    if (!token) {
+      return NextResponse.json(
+        { message: "You must be authenticated first" },
+         { status: 401 });
+    }
 
-  if (!session || session.user.role !== "admin") {
+  
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    
+    if (!decoded || decoded.role !== "admin") {
+      return NextResponse.json(
+        { message: "You are not authorized for this action" },
+         { status: 403 });
+    }
+
+
+    await connectMongoDB();
+  
+      await ProductModal.deleteOne({
+      _id : data.ProductId
+    })
+  
     return NextResponse.json(
-      { error: "Unauthorized" },
-      { status: 401 }
-    );
+      { message: "Post Deleted successfully" },
+      {status:200});
+
+  }catch(error){
+
+   console.error(error);
+   return NextResponse.json(
+    {message:error.message},
+  {status:500})
   }
-
-  const data = await request.json();
-
-
-
-  await connectMongoDB();
-
-  const objData=  await ProductModal.deleteOne({
-    _id : data.ProductId
-  })
-
-  return NextResponse.json(objData);
+  
 }

@@ -2,7 +2,9 @@
 import React from 'react'
 import "./admin.css"
 import { useState } from "react";
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
+import { useSession } from 'next-auth/react';
+
 export default function ProductForm() {
 
   const [error,seterror] = useState(null);
@@ -12,7 +14,9 @@ export default function ProductForm() {
   const [price, setprice] = useState(null);
   const [category, setcategroy] = useState(null);
   const [description, setdescription] = useState(null);
+
   const router = useRouter();
+ const { data: session } = useSession();
 
   const handlesubmit = async (eo) => {
     eo.preventDefault();
@@ -33,10 +37,12 @@ export default function ProductForm() {
   formData.set("category",category)
   formData.set("description",description);
   
-
+  const token = session?.accessToken;
   const resAddProduct = await fetch("api/addproduct", {
-    method: "post",
-    
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+    },
     body: formData,
   });
 

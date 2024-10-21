@@ -12,6 +12,7 @@ export default function Updateform({ ProductId }) {
   const [price, setprice] = useState(null);
   const [category, setcategory] = useState(null);
   const [description, setdescription] = useState(null);
+
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -27,10 +28,12 @@ export default function Updateform({ ProductId }) {
       return;
     }
 
+    const token = session?.accessToken;
     const response = await fetch("http://localhost:3000/api/updateproduct", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify({ title, price, category , description, ProductId }),
     });

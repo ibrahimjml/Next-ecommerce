@@ -71,7 +71,9 @@ main section.products.flex{
   width: 300px;
   transition: all .3s ease-in-out;
 }
-
+.card image{
+  width: 277px;
+}
 .card:hover {
   rotate: 0.5deg;
   scale: 1.01;

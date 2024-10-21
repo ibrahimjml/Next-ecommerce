@@ -17,10 +17,12 @@ export default function AdminButtons({ProductId}) {
     seterror(null)
     setloading(true);
 
+    const token = session?.accessToken;
     const response = await fetch("http://localhost:3000/api/deleteproduct", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
       },
       body: JSON.stringify({ProductId}),
     });

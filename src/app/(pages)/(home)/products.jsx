@@ -10,6 +10,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import { Button, CardActions, CardContent, CardMedia, IconButton, Stack, Typography,Badge } from "@mui/material";
 import { Add, Remove, ShoppingCart } from "@mui/icons-material";
 import Card from "@mui/material/Card";
+import Image from "next/image";
 
 export default function Products() {
   
@@ -101,12 +102,7 @@ export default function Products() {
   sx={{ maxWidth: 277, mb: 6, mx: 2 }}
 >
   <Link href={`/product-details/${item._id}`}>
-    <CardMedia
-      component="img"
-      sx={{ maxWidth: "300px" }}
-      image={item.image}
-      alt={item.title}
-    />
+  <Image src={item.image} alt={item.title} width={277} height={277} priority={true}/>
   </Link>
 
   

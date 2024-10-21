@@ -3,6 +3,7 @@ import { connectMongoDB } from "@/app/DB/mongoose";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const authOptions = {
  providers: [
@@ -10,8 +11,11 @@ export const authOptions = {
 
   name: "Credentials",
 
-  credentials: {},
-  async authorize(credentials, req) {
+  credentials: {
+    email: { label: "email", type: "email" },
+    pass: { label: "pass", type: "password" },
+  },
+  async authorize(credentials) {
 
   await connectMongoDB();
 
@@ -30,12 +34,12 @@ export const authOptions = {
           role: user.role, 
         };
        }else{
-        return null
+        throw new Error("invalid credantials");
        }
 
     } else {
     
-      return null
+      throw new Error("No user found ");
 
     }
   }
@@ -49,19 +53,28 @@ pages: {
   signIn: '/signin',
   
 },
+session: {
+  strategy: "jwt", 
+},
 callbacks: {
   async jwt({ token, user }) {
-  
     if (user) {
       token.role = user.role;
+      token.accessToken = jwt.sign(
+        { id: user.id, role: user.role }, 
+        process.env.JWT_SECRET, 
+        { expiresIn: '1h' } 
+      );
+    
     }
+  
     return token;
   },
 
   async session({ session, token }) {
-  
     if (token) {
       session.user.role = token.role;
+      session.accessToken = token.accessToken; 
     }
     return session;
   },
