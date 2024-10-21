@@ -46,6 +46,7 @@ only admin role  can perform these CRUD.
 
 `Login`
 - `POST /api/signin` - login to get JWT token access.
+  
 `products`
 - `GET /api/getproducts` - Get all products.No authentication required.
 - `GET /api/getOneproduct` - Get single product send id in params.No authentication required.
