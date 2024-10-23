@@ -1,4 +1,4 @@
-![Next js](https://github.com/user-attachments/assets/fb10f80a-8866-46fe-b508-0051627db18c)This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 # Next Ecommerce 
 ![schooldash-dahboard-page](https://i.postimg.cc/Y0VrMnTp/Screenshot-2024-10-23-162711.png)
