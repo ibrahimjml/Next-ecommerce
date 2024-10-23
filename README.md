@@ -1,7 +1,10 @@
 ![Next js](https://github.com/user-attachments/assets/fb10f80a-8866-46fe-b508-0051627db18c)This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 # Next Ecommerce 
-
+![schooldash-dahboard-page](https://i.postimg.cc/Y0VrMnTp/Screenshot-2024-10-23-162711.png)
+![schooldash-dahboard-page](https://i.postimg.cc/8CtVTXrq/Screenshot-2024-10-23-163035.png)
+![schooldash-dahboard-page](https://i.postimg.cc/j2VT1wf5/Screenshot-2024-10-23-163700.png)
+![schooldash-dahboard-page](https://i.postimg.cc/C5Vy7yyn/Screenshot-2024-10-23-163226.png)
 ## Project Description
 
 This eCommerce application is built using Next.js, a powerful React framework that enables server-side rendering and static site generation for optimal performance. The project features a sleek and responsive design, allowing users to browse products seamlessly across various devices.
