@@ -2,8 +2,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { notFound } from "next/navigation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import Loading from "./loading";
 import { useCart } from "@/app/context/cartcontext";
 import { styled, useTheme } from "@mui/material/styles";
@@ -75,11 +73,6 @@ export default function Products() {
       <button onClick={()=>{setcategroy("kids")}}>kids</button>
     </div>
       <h1 className="recommended">
-          <FontAwesomeIcon
-            style={{ width: "2rem" }}
-            className="fa-solid fa-check"
-            icon={faCheck}
-          />
           {category ? `Latest ${category} Collection` : "Latest Collection"}
         </h1>
       
@@ -112,7 +105,7 @@ export default function Products() {
     </Typography>
 
     <Typography variant="body2" color="text.secondary">
-      {item.description}
+      {item.description.slice(0,50)}
     </Typography>
   </CardContent>
 

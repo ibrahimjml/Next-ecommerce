@@ -34,7 +34,7 @@ export default function Navlink({issignedin=false,isregistered=false}) {
           Add Product
         </Link>
         <button className='sign-in' onClick={()=>{signOut()}}>Sign Out</button>
-        <p style={{ marginBottom: "0" }}>Welcome {session.user.name} ♥</p>
+        <p style={{ marginBottom: "0" }}> {session.user.name} ♥</p>
       </nav>
     );
   }
@@ -59,7 +59,7 @@ export default function Navlink({issignedin=false,isregistered=false}) {
             <span className="products-number">{totalItems}</span>
           </Link>
             <button className='sign-in' onClick={()=>{signOut()}}>Sign Out</button>
-            <p>Welcome {session.user.name}</p>
+            <p>{session.user.name}</p>
             </>
           )}
           {status === "unauthenticated" && (
